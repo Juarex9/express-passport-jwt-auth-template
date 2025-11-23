@@ -1,31 +1,31 @@
 # Express + Passport + JWT Auth Template
 
-A reusable **Node.js / Express** starter template for building authentication backends with **Passport** and **JSON Web Tokens (JWT)**.  
-Includes user registration, login, protected routes and basic error handling, ready to plug into any frontend.
+Reusable template in Node.js / Express for building authentication backends with Passport and JSON Web Tokens (JWT). Includes user registration, login, protected routes and basic error handling — ready to connect to any frontend.
 
 ---
 
 ## Features
 
 - User registration and login
-- Password hashing
+- Password hashing (bcrypt)
 - JWT-based authentication
-- Protected routes via middleware
+- Middleware to protect routes
 - MongoDB + Mongoose integration
-- Organized project structure (config, controllers, middlewares, routes, etc.)
-- Environment variables support with `.env`
+- Organized structure (config, controllers, middlewares, routes, etc.)
+- Environment variable handling with `.env`
+- Basic usage examples with curl
 
 ---
 
 ## Tech Stack
 
-- **Runtime:** Node.js
-- **Framework:** Express
-- **Auth:** Passport, Passport JWT
-- **Tokens:** JSON Web Token (JWT)
-- **Database:** MongoDB + Mongoose
-- **Views (optional/demo):** EJS (or similar)
-- **Env management:** dotenv
+- Runtime: Node.js
+- Framework: Express
+- Authentication: Passport, passport-jwt
+- Tokens: jsonwebtoken
+- Database: MongoDB + Mongoose
+- Views (optional/demo): EJS (or another engine)
+- Env: dotenv
 
 ---
 
@@ -41,49 +41,65 @@ Includes user registration, login, protected routes and basic error handling, re
 │   ├── controllers/
 │   │   └── user.controller.js  # User logic (register, login, profile, etc.)
 │   ├── middlewares/
-│   │   ├── auth.js             # JWT auth middleware & error handling
-│   │   └── passportAuth.js     # Passport initialization / helpers
+│   │   ├── auth.js             # JWT middleware & error handling
+│   │   └── passportAuth.js     # Passport initialization and helpers
 │   ├── models/
 │   │   └── User.js             # User model (Mongoose schema)
 │   ├── routes/
-│   │   ├── user.router.js      # Auth & user-related routes
+│   │   ├── user.router.js      # Authentication & user routes
 │   │   └── views.router.js     # Example routes for views (optional)
-│   └── utils/                  # Utility functions (if needed)
-├── views/                      # View templates (optional)
-├── .env                        # Environment variables (NOT committed)
+│   └── utils/                  # Utilities (if applicable)
+├── views/                      # Templates (optional)
+├── .env                        # Environment variables (DO NOT commit)
 ├── .gitignore
-├── index.js                    # Application entry point
+├── index.js                    # Entry point
 ├── package.json
 └── package-lock.json
-´´´
+```
 
 ---
 
-## Setup & Installation
-**1. Clone the repository**
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd <your-repo-name>
-**2. Install dependencies**
+## Installation and Running
+
+1. Clone the repository
+```bash
+git clone https://github.com/Juarex9/express-passport-jwt-auth-template.git
+cd express-passport-jwt-auth-template
+```
+
+2. Install dependencies
+```bash
 npm install
-**3. Create your .env file**
-Create a .env file in the project root based on the example below:
+```
+
+3. Create the `.env` file in the root (you can use the example below)
+
+4. Run the app
+```bash
+npm start
+# or for development with nodemon (if configured)
+npm run dev
+```
+
+---
+
+## Example `.env` (use the .env.example already in the repository)
+```env
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/auth_template
-JWT_SECRET=changeme
-SESSION_SECRET=changeme
-**4. Run the application**
-npm start
-# or, if you have a dev script with nodemon:
-npm run dev
+JWT_SECRET=your_jwt_secret_here
+SESSION_SECRET=your_session_secret_here
+```
 
 ---
 
-### Middlewares
-**auth.js**
-- Verifies the JWT from the Authorization header.
-- Attaches the decoded user information to req.user.
-- Returns appropriate error codes if the token is missing or invalid.
-**passportAuth.js**
-- Sets up Passport initialization.
-- Configures JWT strategy (and optionally a local strategy).
-- Can be reused in any route that requires Passport authentication.
+## Middlewares
+
+- auth.js
+  - Verifies the JWT from the Authorization header.
+  - If the token is valid, attaches the information to `req.user`.
+  - Returns 401/403 errors as appropriate.
+
+- passportAuth.js
+  - Initializes Passport and configures the JWT strategy (and optionally local).
+  - Reusable in routes that require Passport authentication.
