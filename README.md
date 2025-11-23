@@ -55,30 +55,35 @@ Includes user registration, login, protected routes and basic error handling, re
 ├── index.js                    # Application entry point
 ├── package.json
 └── package-lock.json
+´´´
 
+---
 
-Setup & Installation
-1. Clone the repository
+## Setup & Installation
+**1. Clone the repository**
 git clone https://github.com/<your-username>/<your-repo-name>.git
 cd <your-repo-name>
-2. Install dependencies
+**2. Install dependencies**
 npm install
-3. Create your .env file
+**3. Create your .env file**
 Create a .env file in the project root based on the example below:
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/auth_template
 JWT_SECRET=changeme
 SESSION_SECRET=changeme
-4. Run the application
+**4. Run the application**
 npm start
 # or, if you have a dev script with nodemon:
 npm run dev
-Middlewares
-auth.js
+
+---
+
+### Middlewares
+**auth.js**
 - Verifies the JWT from the Authorization header.
 - Attaches the decoded user information to req.user.
 - Returns appropriate error codes if the token is missing or invalid.
-passportAuth.js
+**passportAuth.js**
 - Sets up Passport initialization.
 - Configures JWT strategy (and optionally a local strategy).
 - Can be reused in any route that requires Passport authentication.
